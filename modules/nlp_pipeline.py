@@ -1,4 +1,5 @@
 import modules
+from modules.translator import translate_to_korean
 
 class NLPPipeline:
     def __init__(self):
@@ -28,3 +29,6 @@ class NLPPipeline:
         optimized = self.optimizer.optimize(tokens)
 
         return optimized
+    
+    def translate_to_korean(self, text):
+        return translate_to_korean(text)

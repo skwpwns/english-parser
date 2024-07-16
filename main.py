@@ -26,16 +26,23 @@ class NLPApplication:
         self.formats_label.pack(padx=20, pady=20)
         self.optimized_label = tk.Label(self.root, text='Optimized-Sentence will be displayed here.', wraplength=400, justify='left')
         self.optimized_label.pack(padx=20, pady=20)
+        self.translation_label = tk.Label(self.root, text='Translation will be displayed here.', wraplength=400, justify='left')
+        self.translation_label.pack(padx=20, pady=20)
         
     def show_result(self, entry):
         text = entry.get()
-        pos_tags = self.pipeline.pos_tagging(text) if text else 'Please enter some text.'
-        format = self.pipeline.format_analysis(text) if text else 'Please enter some text.'
-        optimized = self.pipeline.sentence_optimize(text) if text else 'Please enter some text.'
+        if text:
+            pos_tags = self.pipeline.pos_tagging(text)
+            format = self.pipeline.format_analysis(text)
+            optimized = self.pipeline.sentence_optimize(text)
+            translation = self.pipeline.translate_to_korean(text)
+        else:
+            pos_tags, format, optimized = 'Please enter some text.'
 
         self.pos_tags_label.config(text=pos_tags)
         self.formats_label.config(text=format)
         self.optimized_label.config(text=optimized)
+        self.translation_label.config(text=translation)
 
 def main():
     root = tk.Tk()
